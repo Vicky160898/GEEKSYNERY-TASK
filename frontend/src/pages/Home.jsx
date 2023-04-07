@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Avatar,
   Box,
   Container,
   Tab,
@@ -15,10 +14,7 @@ import SignUp from "./SignUp";
 export default function Home() {
   return (
     <>
-      {/* <Helmet>
-        <title>REAL-CHAT-APP-LOGIN/SIGNUP</title>
-      </Helmet> */}
-      <Container maxW={"lg"} centerContent>
+      <Container maxW={"lg"} mt={'20px'} centerContent>
         <Box
           display="flex"
           justifyContent={"center"}
@@ -41,14 +37,8 @@ export default function Home() {
             borderRadius="lg"
             borderWidth={"1px"}
           >
-            <Avatar
-              width={"10%"}
-              borderRadius="50%"
-              src="https://thumbs.gfycat.com/FocusedMediumAcornbarnacle-size_restricted.gif"
-              alt="gif"
-            />
             <Text fontSize={"4xl"} fontFamily="Work sans" color={"black"}>
-              Real-Chat-App
+              GEEKSYNERY-TASK
             </Text>
           </Box>
         </Box>
