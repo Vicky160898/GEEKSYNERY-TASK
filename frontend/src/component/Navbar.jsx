@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const formData = JSON.parse(localStorage.getItem("UserInfo"));
   const handleLogout = () => {
     localStorage.removeItem("UserInfo");
     navigate("/login");
@@ -12,7 +13,10 @@ export default function Navbar() {
   };
   return (
     <Flex justify="space-between" align="center" px={8} py={4} bg="gray.200">
-      <Button colorScheme="blue">Button 1</Button>
+      {formData?.map((el) => (
+        <Button colorScheme="blue">{el.profession}</Button>
+      ))}
+
       <Button colorScheme="green" onClick={handleLogout}>
         LogOut
       </Button>

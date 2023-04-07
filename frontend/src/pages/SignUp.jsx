@@ -21,6 +21,7 @@ export default function SignUp() {
   const [profession, setProfession] = useState("");
   const [loading, setLoading] = useState(false);
   const toast = useToast();
+  let Data = [];
   const handleSubmit = async () => {
     setLoading(true);
     if (!name || !email || !password || !confirmpassword) {
@@ -47,8 +48,8 @@ export default function SignUp() {
     }
     // Save form data to local storage
     const formData = { name, password, email, number, profession };
-    console.log(formData);
-    localStorage.setItem("UserInfo", JSON.stringify(formData));
+    Data.push(formData);
+    localStorage.setItem("UserInfo", JSON.stringify(Data));
     // Reset form fields
     setName("");
     setPassword("");

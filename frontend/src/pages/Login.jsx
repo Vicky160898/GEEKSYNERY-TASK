@@ -16,9 +16,11 @@ export default function Login() {
   const [name, setName] = useState();
   const toast = useToast();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+
+  // Get previously registered form data from local storage
+  const formData = JSON.parse(localStorage.getItem("UserInfo")) || [];
+
   const handleSubmit = async () => {
-    setLoading(true);
     if (!name || !password) {
       toast({
         title: "Please Fill all the Fields!",
@@ -27,27 +29,35 @@ export default function Login() {
         isClosable: true,
         position: "top",
       });
-      setLoading(false);
+
       return;
     }
-    // Get previously registered form data from local storage
-    const formData = JSON.parse(localStorage.getItem("UserInfo"));
-    setLoading(true);
-    if (
-      name === formData.name &&
-      password === formData.password &&
-      formData !== undefined
-    ) {
-      toast({
-        title: "Login Successful!",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-        position: "top",
-      });
-      setLoading(false);
-      navigate("/");
-      return;
+    if (formData.length !== 0) {
+      const matchingLoginInfo = formData.find(
+        (el) => el.name === name && el.password === password
+      );
+      if (matchingLoginInfo) {
+        toast({
+          title: "Login Successful!",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+
+        navigate("/");
+        return;
+      } else {
+        toast({
+          title: "Sign-up First!",
+          status: "warning",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+
+        return;
+      }
     } else {
       toast({
         title: "Invalid Credential!",
@@ -56,7 +66,7 @@ export default function Login() {
         isClosable: true,
         position: "top",
       });
-      setLoading(false);
+
       return;
     }
   };
@@ -96,7 +106,6 @@ export default function Login() {
         width="100%"
         style={{ marginTop: 15 }}
         onClick={handleSubmit}
-        isLoading={loading}
       >
         Login
       </Button>
